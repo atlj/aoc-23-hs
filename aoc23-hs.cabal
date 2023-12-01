@@ -13,6 +13,8 @@ common common-options
     base,
     containers,
     file-embed,
+    text,
+    text-replace,
 
 executable day0
   import: common-options
