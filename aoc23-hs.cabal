@@ -15,6 +15,7 @@ common common-options
     file-embed,
     text,
     text-replace,
+    split,
 
 executable day0
   import: common-options
