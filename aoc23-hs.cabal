@@ -17,6 +17,7 @@ common common-options
     text-replace,
     split,
     HUnit,
+    groupBy,
 
 executable day0
   import: common-options
