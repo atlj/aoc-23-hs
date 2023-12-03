@@ -32,3 +32,8 @@ executable day2
   import: common-options
   main-is: day2.hs
   hs-source-dirs: app
+
+executable day3
+  import: common-options
+  main-is: day3.hs
+  hs-source-dirs: app

@@ -7,7 +7,7 @@ input :: String
 input = $(embedStringFile "input/day0.txt")
 
 testHello = TestCase $ do
-  assertEqual "can say hello to John Doe" (hello "John Doe") "Hello John Doe"
+  assertEqual "can say hello to John Doe" "Hello John Doe" (hello "John Doe")
 
 hello :: String -> String
 hello name = "Hello " ++ name
