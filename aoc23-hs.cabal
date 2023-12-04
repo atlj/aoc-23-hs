@@ -17,7 +17,6 @@ common common-options
     text-replace,
     split,
     HUnit,
-    groupBy,
 
 executable day0
   import: common-options
@@ -37,4 +36,9 @@ executable day2
 executable day3
   import: common-options
   main-is: day3.hs
+  hs-source-dirs: app
+
+executable day4
+  import: common-options
+  main-is: day4.hs
   hs-source-dirs: app
