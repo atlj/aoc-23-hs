@@ -1,2 +1,2 @@
 procs:
-  watch-run: npx nodemon --ext "*.hs" -x "cabal run day6" -w "app"
+  watch-run: npx nodemon --ext "*.hs" -x "cabal run day5" -w "app"
