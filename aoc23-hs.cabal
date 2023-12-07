@@ -52,3 +52,8 @@ executable day6
   import: common-options
   main-is: day6.hs
   hs-source-dirs: app
+
+executable day7
+  import: common-options
+  main-is: day7.hs
+  hs-source-dirs: app
