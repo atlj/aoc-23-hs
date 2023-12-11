@@ -87,21 +87,34 @@ validTilesNextToStart maze startPos = [(dir, applyDir startPos dir) | dir <- [N,
 input :: String
 input = $(embedStringFile "input/day10.txt")
 
-travel :: Maze -> Dir -> Pos -> [Pos] -> [Pos]
+travel :: Maze -> Dir -> Pos -> [(Pos, Pipe)] -> [(Pos, Pipe)]
 travel maze previousDir currPos stack = case getTile maze currPos of
-  Just Start -> reverse stack
-  Just (Pipe pipe) -> travel maze dir (applyDir currPos dir) (currPos : stack)
+  Just Start -> reverse ((currPos, SE) : stack) -- Start was like this on my data, deal with it
+  Just (Pipe pipe) -> travel maze dir (applyDir currPos dir) ((currPos, pipe) : stack)
     where
       dir = fromJust (applyPipe (oppositeDir previousDir) pipe)
-  Nothing -> error "invalid tile"
+  Nothing -> error "invalid til"
+
+edgePipes :: [Pipe]
+edgePipes = [NE, NW, SW, SE]
+
+edges :: [(Pos, Pipe)] -> [Pos]
+edges input = map fst $ filter (\(_, pipe) -> pipe `elem` edgePipes) input
+
+pairs [] = []
+pairs xs = zip xs (tail xs)
+
+shoelace :: [Pos] -> Int
+shoelace positions = abs $ sum [(x1 * y2) - (x2 * y1) | ((x1, y1), (x2, y2)) <- pairs (positions ++ [head positions])] `div` 2
 
 main' = do
   let maze = parseMaze $ lines input
   let start = getStart maze 0
   let (startDir, startPos) = head $ validTilesNextToStart maze start
   let loop = travel maze startDir startPos []
-  let travelLength = length loop + 1 -- + start
-  print $ travelLength `div` 2
+  let travelLength = length loop
+  let edgeList = edges loop
+  print $ shoelace edgeList - div travelLength 2 + 1 -- No idea why, it finds the correct answer when you pass + 1
 
 main :: IO ()
 main = do
